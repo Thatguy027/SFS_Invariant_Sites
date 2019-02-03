@@ -1,0 +1,35 @@
+[[annotation]]
+file="/projects/b1059/projects/Stefan/quick_sfs/ONE_ANCE_NOMISSING_Annotation_Files/ARMS_CENTERS.bed.gz"
+columns = [4]
+names=["GENOMIC_REGION"]
+ops=["self"]
+
+[[annotation]]
+file="/projects/b1059/projects/Stefan/quick_sfs/ONE_ANCE_NOMISSING_Annotation_Files/ANC.bed.gz"
+columns = [4]
+names=["AA"]
+ops=["self"]
+
+[[annotation]]
+file="/projects/b1059/projects/Stefan/quick_sfs/ONE_ANCE_NOMISSING_Annotation_Files/4FOLD_SITES.bed.gz"
+columns = [4]
+names=["4FOLD"]
+ops=["self"]
+
+[[annotation]]
+file="/projects/b1059/projects/Stefan/quick_sfs/ONE_ANCE_NOMISSING_Annotation_Files/0FOLD_SITES.bed.gz"
+columns = [4]
+names=["0FOLD"]
+ops=["self"]
+
+[[annotation]]
+file="/projects/b1059/projects/Stefan/quick_sfs/ONE_ANCE_NOMISSING_Annotation_Files/SNPEFF_REGION.bed.gz"
+columns = [4]
+names=["SNPEFF_REGION"]
+ops=["self"]
+
+[[annotation]]
+file="/projects/b1059/projects/Stefan/quick_sfs/ONE_ANCE_NOMISSING_Annotation_Files/WS266_Masked_Regions_sorted.bed.gz"
+columns = [4]
+names=["MASKED"]
+ops=["self"]
