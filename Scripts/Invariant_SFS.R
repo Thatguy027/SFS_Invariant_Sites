@@ -2,10 +2,11 @@ library("tidyverse")
 library("seqinr")
 
 # load fasta files
-nt_fa <- seqinr::read.fasta(file = "~/NU/SFS_invariant_sites/WS261_spliced_cds.fa")
+try(setwd(dirname(rstudioapi::getActiveDocumentContext()$path)))
+nt_fa <- seqinr::read.fasta(file = "../Data/WS261_spliced_cds.fa")
 
 # load variant information
-snv <- data.table::fread("~/NU/SFS_invariant_sites/SFS_INPUT.tsv") %>%
+snv <- data.table::fread("../Data/SFS_INPUT.tsv") %>%
   dplyr::filter(grepl("WBGene", WBGeneID), grepl("p.", aa_CHANGE)) %>%
   dplyr::mutate(DERIVED_AF = ifelse(AA == REF, round(AF, digits = 5), 
                                     ifelse(AA == ALT, round(1-AF, digits = 5), NA))) %>%
@@ -94,12 +95,12 @@ all_gene_degen_df <- dplyr::bind_rows(degeneracy_list[!sapply(degeneracy_list, i
   tidyr::separate(transcript_name, into = c("cosmid", "transcript", "altsplice"), sep = "\\.") %>%
   dplyr::distinct(aa, aa_pos, codon, cosmid, transcript, .keep_all = T)
 
-save(all_gene_degen_df, file = "~/NU/SFS_invariant_sites/gene_degeneracy.Rda")
+save(all_gene_degen_df, file = "../Data/gene_degeneracy.Rda")
 
-load( "~/NU/SFS_invariant_sites/gene_degeneracy.Rda")
+load( "../Data/gene_degeneracy.Rda")
 
-chr_regions <- data.table::fread("~/NU/SFS_invariant_sites/spectra/ARMS_CENTERS.bed") %>%
-  dplyr::rename(CHROM = V1, Spos = V2, Epos = V3, CLASS = V4)
+chr_regions <- readr::read_tsv("../Data/Annotation_Files/ARMS_CENTERS.bed.gz", col_names = F) %>%
+  dplyr::rename(CHROM = X1, Spos = X2, Epos = X3, CLASS = X4)
 
 append_region <- list()
 
@@ -125,4 +126,4 @@ genome_invariant_fold <- all_gene_degen_df %>%
 
 invariant_sites <- dplyr::bind_rows(genome_invariant_fold, region_variant_fold)
 
-write.table(invariant_sites, "~/NU/SFS_invariant_sites/spectra/invariant_site_by_region.tsv", col.names = T, row.names = F, quote = F, sep = "\t")
+write.table(invariant_sites, "../Data/invariant_site_by_region.tsv", col.names = T, row.names = F, quote = F, sep = "\t")
