@@ -3,6 +3,10 @@
 # args:
 # 1 - SFS_INPUT.tsv file
 # 2 - "no_indel" to exclude indels
+# 3 - invariant_site_counts.tsv
+# 4 - number of samples
+
+# args <- c("../Data/SFS_INPUT_diverged.tsv", "no_indel", "../Data/invariant_site_by_region_diverged.tsv", "52")
 
 args <- commandArgs(trailingOnly = TRUE)
 
@@ -35,7 +39,7 @@ if(args[2] == "no_indel"){
                                       ifelse(AA == ALT, round(1-AF, digits = 5), NA)))
 }
 
-af_df <- data.frame(DERIVED_AF = round(seq(0,1,by = 1/239), digits = 5))
+af_df <- data.frame(DERIVED_AF = round(seq(0,1,by = 1/as.numeric(args[4])), digits = 5))
 
 
 sfs_out <- function(nclass, sclass, region, chrom){

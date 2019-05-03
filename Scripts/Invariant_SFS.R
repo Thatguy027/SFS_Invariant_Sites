@@ -1,12 +1,24 @@
 library("tidyverse")
 library("seqinr")
 
+
+VARIANT_FILE="../Data/SFS_INPUT.tsv"
+SAVE_FILE="../Data/invariant_site_by_region.tsv"
+# HTA phenotyped strains
+DIVERGED_MODIFIER=""
+# Non-swept strains
+DIVERGED_MODIFIER="_diverged"
+
+VARIANT_FILE=glue::glue("../Data/SFS_INPUT{DIVERGED_MODIFIER}.tsv")
+SAVE_FILE=glue::glue("../Data/invariant_site_by_region{DIVERGED_MODIFIER}.tsv")
+DEGENERACY_FILE=glue::glue("../Data/gene_degeneracy{DIVERGED_MODIFIER}.Rda")
+
 # load fasta files
 try(setwd(dirname(rstudioapi::getActiveDocumentContext()$path)))
 nt_fa <- seqinr::read.fasta(file = "../Data/WS261_spliced_cds.fa")
 
 # load variant information
-snv <- data.table::fread("../Data/SFS_INPUT.tsv") %>%
+snv <- data.table::fread(VARIANT_FILE) %>%
   dplyr::filter(grepl("WBGene", WBGeneID), grepl("p.", aa_CHANGE)) %>%
   dplyr::mutate(DERIVED_AF = ifelse(AA == REF, round(AF, digits = 5), 
                                     ifelse(AA == ALT, round(1-AF, digits = 5), NA))) %>%
@@ -95,9 +107,9 @@ all_gene_degen_df <- dplyr::bind_rows(degeneracy_list[!sapply(degeneracy_list, i
   tidyr::separate(transcript_name, into = c("cosmid", "transcript", "altsplice"), sep = "\\.") %>%
   dplyr::distinct(aa, aa_pos, codon, cosmid, transcript, .keep_all = T)
 
-save(all_gene_degen_df, file = "../Data/gene_degeneracy.Rda")
+save(all_gene_degen_df, file = DEGENERACY_FILE)
 
-load( "../Data/gene_degeneracy.Rda")
+load(DEGENERACY_FILE)
 
 chr_regions <- readr::read_tsv("../Data/Annotation_Files/ARMS_CENTERS.bed.gz", col_names = F) %>%
   dplyr::rename(CHROM = X1, Spos = X2, Epos = X3, CLASS = X4)
@@ -126,4 +138,4 @@ genome_invariant_fold <- all_gene_degen_df %>%
 
 invariant_sites <- dplyr::bind_rows(genome_invariant_fold, region_variant_fold)
 
-write.table(invariant_sites, "../Data/invariant_site_by_region.tsv", col.names = T, row.names = F, quote = F, sep = "\t")
+write.table(invariant_sites, SAVE_FILE, col.names = T, row.names = F, quote = F, sep = "\t")
