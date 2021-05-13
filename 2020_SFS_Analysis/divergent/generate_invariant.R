@@ -16,7 +16,7 @@ DEGENERACY_FILE=glue::glue("gene_degeneracy{DIVERGED_MODIFIER}.Rda")
 
 # load fasta files
 try(setwd(dirname(rstudioapi::getActiveDocumentContext()$path)))
-nt_fa <- seqinr::read.fasta(file = "WS261_spliced_cds.fa")
+nt_fa <- seqinr::read.fasta(file = "../../Data/WS261_spliced_cds.fa")
 
 # load variant information
 snv <- data.table::fread(VARIANT_FILE) %>%
