@@ -1,0 +1,13 @@
+data_path_1 /cap1/kgilbert/New_DFE_alpha/ProgramData
+sfs_input_file Inputs/infile.txt
+est_dfe_results_dir Outputs/OutputClass1_noName
+est_dfe_demography_results_file Outputs/OutputClass0_noName/est_dfe.out
+site_class 1
+fold 0
+epochs 2
+mean_s_variable 1
+mean_s -0.1
+beta_variable 1
+beta 0.5
+p_additional 0.05
+s_additional 0.05

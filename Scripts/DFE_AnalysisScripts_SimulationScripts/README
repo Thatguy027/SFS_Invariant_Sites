@@ -1,0 +1,7 @@
+subfolders include input scripts used for slim simulations
+ and input parameters for DFE-alpha analyses
+
+main files are scripts to convert slim output into SFS files and analyze with DFE-alpha, or to take C elegans SFS data and analyze with DFE-alpha, respectively
+    all the .R files are called from within the .sh scripts, and mainly perform data manipulation of the file formats
+    all the "CommandLine..." files are called within the "RunScript... .sh" files
+    Each "RunScript.... .sh" script is referring to a specific analysis set of either the whole genome, or separated into just genome arms or centers, as well as for unfolded versus folded SFS

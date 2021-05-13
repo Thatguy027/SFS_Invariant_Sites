@@ -1,0 +1,8 @@
+data_path_1 /cap1/kgilbert/DFE_alpha/ProgramData/
+divergence_file Inputs/Divergence_CENTERS_Apr6_N5e5_mixtureGamma_bendel_80self_rep9.txt
+est_alpha_omega_results_file output_est_alpha_omega_CENTERS_Apr6_N5e5_mixtureGamma_bendel_80self_rep9.txt.out
+est_dfe_results_file Outputs/OutputClass1_Avg_SFS_10NtoEnd_CENTERS_Apr6_N5e5_mixtureGamma_bendel_80self_rep9/est_dfe.out
+neut_egf_file Outputs/OutputClass0_Avg_SFS_10NtoEnd_CENTERS_Apr6_N5e5_mixtureGamma_bendel_80self_rep9/neut_egf.out
+sel_egf_file Outputs/OutputClass1_Avg_SFS_10NtoEnd_CENTERS_Apr6_N5e5_mixtureGamma_bendel_80self_rep9/sel_egf.out
+do_jukes_cantor         0
+remove_poly             0

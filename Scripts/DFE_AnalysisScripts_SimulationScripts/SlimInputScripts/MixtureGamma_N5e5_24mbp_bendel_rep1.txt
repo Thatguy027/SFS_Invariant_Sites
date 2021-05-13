@@ -1,0 +1,87 @@
+initialize() {
+	setSeed(1234567890);  /// change the value for replicates 2-20 by shifting the number order, e.g. replicate 2 seed = 2345678901, seed 3 = 3456789012, seed 10 = 10123456789, seed 11 = 21234567890, 12 = 22345678901
+
+	initializeMutationRate(3.3e-9);
+
+	initializeMutationType("m1", 0.5, "f", 0.0);			// neutral 
+	initializeMutationType("m2", 0.3, "g", -0.001, 0.3);	// delet, mostly small effect
+	initializeMutationType("m3", 0.2, "g", -0.01, 0.3);		// delet, larger effect
+	initializeMutationType("m4", 0.5, "g", 0.01, 0.3);		// beneficial
+
+// if want 75% of mutations to be deleterious:
+	initializeGenomicElementType("g1", c(m1,m2,m3,m4), c(0.25, 0.7125, 0.037429, 0.00071 ));
+	initializeGenomicElementType("g2", c(m1,m2,m3,m4), c(0.25, 0.7125, 0.037429, 0.00071 ));				// make mutations happen the same on all genomic elements
+
+        // six chromosome with two arms and a center - 4Mbp each
+        // arms are 72% of the chromosome (1440000 per arm), split in two with center in the middle (center = 28% == 1120000 bp)
+        initializeGenomicElement(g1, 0, 1439999);			// Chr 1 first arm		
+        initializeGenomicElement(g2, 1440000, 2559999);		// Chr 1 center
+        initializeGenomicElement(g1, 2560000, 5439999);		// end chr1, begin chr2
+        initializeGenomicElement(g2, 5440000, 6559999);		// Chr 2 center
+        initializeGenomicElement(g1, 6560000, 9439999);		// end chr2, begin chr3
+        initializeGenomicElement(g2, 9440000, 10559999);		// Chr 3 center
+        initializeGenomicElement(g1, 10560000, 13439999);		// end chr3, begin chr4
+        initializeGenomicElement(g2, 13440000, 14559999);		// Chr 4 center
+        initializeGenomicElement(g1, 14560000, 17439999);		// end chr4, begin chr5
+        initializeGenomicElement(g2, 17440000, 18559999);		// Chr 5 center
+        initializeGenomicElement(g1, 18560000, 21439999);		// end chr5, begin chr6
+        initializeGenomicElement(g2, 21440000, 22559999);		// Chr 6 center
+        initializeGenomicElement(g1, 22560000, 23999999);		// Chr 6 last arm
+
+        initializeRecombinationRate(c(2.35e-7, 4.96e-8, 2.35e-7, 0.5, 2.35e-7, 4.96e-8, 2.35e-7, 0.5, 2.35e-7, 4.96e-8, 2.35e-7, 0.5, 2.35e-7, 4.96e-8, 2.35e-7, 0.5, 2.35e-7, 4.96e-8, 2.35e-7, 0.5, 2.35e-7, 4.96e-8, 2.35e-7), c(1439999, 2559999, 3999999, 4000000, 5439999, 6559999, 7999999, 8000000, 9439999, 10559999, 11999999, 12000000, 13439999, 14559999, 15999999, 16000000, 17439999, 18559999, 19999999, 20000000, 21439999, 22559999, 23999999));
+}
+
+1 {
+
+	sim.addSubpop("p1", 500000);
+	p1.setSelfingRate(0.999);
+}
+
+ 100000 late() { 
+	subsampDiploids = sim.subpopulations.individuals;
+	sampledIndividuals = sample(subsampDiploids, 100);
+	sampledIndividuals.genomes.output();
+}
+ 150000 late() { 
+	subsampDiploids = sim.subpopulations.individuals;
+	sampledIndividuals = sample(subsampDiploids, 100);
+	sampledIndividuals.genomes.output();
+}
+ 200000 late() { 
+	subsampDiploids = sim.subpopulations.individuals;
+	sampledIndividuals = sample(subsampDiploids, 100);
+	sampledIndividuals.genomes.output();
+}
+ 250000 late() { 
+	subsampDiploids = sim.subpopulations.individuals;
+	sampledIndividuals = sample(subsampDiploids, 100);
+	sampledIndividuals.genomes.output();
+}
+ 300000 late() { 
+	subsampDiploids = sim.subpopulations.individuals;
+	sampledIndividuals = sample(subsampDiploids, 100);
+	sampledIndividuals.genomes.output();
+}
+350000 late() { 
+	subsampDiploids = sim.subpopulations.individuals;
+	sampledIndividuals = sample(subsampDiploids, 100);
+	sampledIndividuals.genomes.output();
+}
+ 400000 late() { 
+	subsampDiploids = sim.subpopulations.individuals;
+	sampledIndividuals = sample(subsampDiploids, 100);
+	sampledIndividuals.genomes.output();
+}
+ 450000 late() { 
+	subsampDiploids = sim.subpopulations.individuals;
+	sampledIndividuals = sample(subsampDiploids, 100);
+	sampledIndividuals.genomes.output();
+}
+ 500000 late() { 
+	subsampDiploids = sim.subpopulations.individuals;
+	sampledIndividuals = sample(subsampDiploids, 100);
+	sampledIndividuals.genomes.output();
+}
+
+500000 late() { sim.outputFull("FullOutput_Apr6_N5e5_24mbp_bendel_98self_rep1.txt"); }
+500000 late() { sim.outputFixedMutations("FixedOutput_Apr6_N5e5_24mbp_bendel_98self_rep1.txt"); }

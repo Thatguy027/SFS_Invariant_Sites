@@ -1,0 +1,11 @@
+data_path_1 /cap1/kgilbert/New_DFE_alpha/ProgramData
+sfs_input_file Inputs/Avg_SFS_10NtoEnd_CENTERS_Apr6_N5e5_mixtureGamma_bendel_80self_rep9.txt
+est_dfe_results_dir Outputs/OutputClass1_Avg_SFS_10NtoEnd_CENTERS_Apr6_N5e5_mixtureGamma_bendel_80self_rep9
+est_dfe_demography_results_file Outputs/OutputClass0_Avg_SFS_10NtoEnd_CENTERS_Apr6_N5e5_mixtureGamma_bendel_80self_rep9/est_dfe.out
+site_class 1
+fold 1
+epochs 2
+mean_s_variable 1
+mean_s -0.1
+beta_variable 1
+beta 0.5
